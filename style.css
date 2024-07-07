@@ -216,3 +216,106 @@ textarea::placeholder {
     font-size: 40px;
     color: white;
 }
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.theme-blue ::-webkit-scrollbar-track {
+    background: rgba(0, 51, 102, 0.1);
+}
+
+body.theme-blue ::-webkit-scrollbar-thumb {
+    background: rgba(0, 51, 102, 0.5);
+}
+
+body.theme-blue ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 51, 102, 0.7);
+}
+
+body.theme-green ::-webkit-scrollbar-track {
+    background: rgba(0, 51, 0, 0.1);
+}
+
+body.theme-green ::-webkit-scrollbar-thumb {
+    background: rgba(0, 51, 0, 0.5);
+}
+
+body.theme-green ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 51, 0, 0.7);
+}
+
+body.theme-yellow ::-webkit-scrollbar-track {
+    background: rgba(102, 102, 0, 0.1);
+}
+
+body.theme-yellow ::-webkit-scrollbar-thumb {
+    background: rgba(102, 102, 0, 0.5);
+}
+
+body.theme-yellow ::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 102, 0, 0.7);
+}
+
+body.theme-dark-blue ::-webkit-scrollbar-track {
+    background: rgba(127, 219, 255, 0.1);
+}
+
+body.theme-dark-blue ::-webkit-scrollbar-thumb {
+    background: rgba(127, 219, 255, 0.5);
+}
+
+body.theme-dark-blue ::-webkit-scrollbar-thumb:hover {
+    background: rgba(127, 219, 255, 0.7);
+}
+
+body.theme-dark-green ::-webkit-scrollbar-track {
+    background: rgba(46, 204, 64, 0.1);
+}
+
+body.theme-dark-green ::-webkit-scrollbar-thumb {
+    background: rgba(46, 204, 64, 0.5);
+}
+
+body.theme-dark-green ::-webkit-scrollbar-thumb:hover {
+    background: rgba(46, 204, 64, 0.7);
+}
+
+body.theme-dark-red ::-webkit-scrollbar-track {
+    background: rgba(255, 65, 54, 0.1);
+}
+
+body.theme-dark-red ::-webkit-scrollbar-thumb {
+    background: rgba(255, 65, 54, 0.5);
+}
+
+body.theme-dark-red ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 65, 54, 0.7);
+}
