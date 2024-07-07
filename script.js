@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toolbar = document.getElementById('toolbar');
-    const markdownInput = document.getElementById('markdown-input');
+    const textInput = document.getElementById('text-input');
     const downloadBtn = document.getElementById('download-btn');
     const fontToggleBtn = document.getElementById('font-toggle-btn');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const zenTimer = document.getElementById('zen-timer');
     const themeOptions = document.getElementById('theme-options');
     const themeOptionButtons = document.querySelectorAll('.theme-option');
+    const aboutBtn = document.getElementById('about-btn');
+    const aboutModal = document.getElementById('about-modal');
+    const closeAbout = document.getElementById('close-about');
     const themes = ['default', 'dark-mode', 'theme-blue', 'theme-green', 'theme-yellow', 'theme-dark-blue', 'theme-dark-green', 'theme-dark-red'];
     let currentTheme = 'default';
     let timerInterval;
@@ -15,17 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTextChanged = false;
 
     // Load cached settings
-    const cachedText = localStorage.getItem('markdownText') || '';
+    const cachedText = localStorage.getItem('text') || '';
     const cachedTheme = localStorage.getItem('theme') || 'default';
     const cachedFont = localStorage.getItem('font') || 'sans-serif';
 
-    markdownInput.value = cachedText;
+    textInput.value = cachedText;
     document.body.classList.add(cachedTheme);
     currentTheme = cachedTheme;
     if (cachedFont === 'serif') {
-        markdownInput.classList.add('serif');
+        textInput.classList.add('serif');
     } else {
-        markdownInput.classList.add('sans-serif');
+        textInput.classList.add('sans-serif');
     }
 
     document.body.addEventListener('mousemove', (e) => {
@@ -37,19 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadBtn.addEventListener('click', () => {
-        const blob = new Blob([markdownInput.value], { type: 'text/markdown' });
+        const blob = new Blob([textInput.value], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'document.md';
+        a.download = 'document.txt';
         a.click();
         URL.revokeObjectURL(url);
     });
 
     fontToggleBtn.addEventListener('click', () => {
-        markdownInput.classList.toggle('serif');
-        markdownInput.classList.toggle('sans-serif');
-        const font = markdownInput.classList.contains('serif') ? 'serif' : 'sans-serif';
+        textInput.classList.toggle('serif');
+        textInput.classList.toggle('sans-serif');
+        const font = textInput.classList.contains('serif') ? 'serif' : 'sans-serif';
         localStorage.setItem('font', font);
     });
 
@@ -73,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             closeFullscreen();
         }
-        markdownInput.classList.toggle('zen-mode');
+        textInput.classList.toggle('zen-mode');
         zenTimer.classList.toggle('hidden');
         zenModeActive = !zenModeActive;
         if (zenModeActive) {
@@ -84,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    markdownInput.addEventListener('input', () => {
-        localStorage.setItem('markdownText', markdownInput.value);
+    textInput.addEventListener('input', () => {
+        localStorage.setItem('text', textInput.value);
         ensureCurrentLineInView();
         isTextChanged = true;
     });
 
-    markdownInput.addEventListener('keyup', () => {
+    textInput.addEventListener('keyup', () => {
         ensureCurrentLineInView();
     });
 
@@ -101,17 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    aboutBtn.addEventListener('click', () => {
+        aboutModal.classList.remove('hidden');
+    });
+
+    closeAbout.addEventListener('click', () => {
+        aboutModal.classList.add('hidden');
+    });
+
     function ensureCurrentLineInView() {
-        const textarea = markdownInput;
+        const textarea = textInput;
         const lineHeight = parseInt(window.getComputedStyle(textarea).lineHeight);
         const selectionStart = textarea.selectionStart;
         const textBeforeCursor = textarea.value.substr(0, selectionStart);
         const linesBeforeCursor = textBeforeCursor.split('\n').length;
-
-        const scrollPosition = (linesBeforeCursor - 1) * lineHeight;
         const middlePosition = textarea.clientHeight / 2;
 
-        textarea.scrollTop = scrollPosition - middlePosition + lineHeight / 2;
+        textarea.scrollTop = (linesBeforeCursor - 1) * lineHeight - middlePosition + lineHeight / 2;
     }
 
     function startZenTimer() {
