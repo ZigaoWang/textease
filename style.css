@@ -29,6 +29,21 @@ body.theme-yellow {
     color: #666600;
 }
 
+body.theme-dark-blue {
+    background-color: #001f3f;
+    color: #7FDBFF;
+}
+
+body.theme-dark-green {
+    background-color: #0b3d0b;
+    color: #2ecc40;
+}
+
+body.theme-dark-red {
+    background-color: #3f0000;
+    color: #ff4136;
+}
+
 #toolbar {
     position: fixed;
     top: 50%;
@@ -82,7 +97,11 @@ textarea {
     line-height: 1.6;
     background-color: transparent;
     transition: background-color 0.3s, color 0.3s, font-family 0.3s;
-    overflow-y: auto;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit; /* Inherit color from body */
 }
 
 textarea:focus {

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const zenModeBtn = document.getElementById('zen-mode-btn');
     const zenTimer = document.getElementById('zen-timer');
-    const themes = ['theme-blue', 'theme-green', 'theme-yellow'];
+    const themes = ['theme-blue', 'theme-green', 'theme-yellow', 'theme-dark-blue', 'theme-dark-green', 'theme-dark-red'];
     let currentThemeIndex = 0;
     let timerInterval;
     let zenModeActive = false;
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     markdownInput.addEventListener('input', () => {
         localStorage.setItem('markdownText', markdownInput.value);
+        ensureCurrentLineInView();
     });
 
     markdownInput.addEventListener('keyup', () => {
