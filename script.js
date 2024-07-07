@@ -6,21 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const zenModeBtn = document.getElementById('zen-mode-btn');
     const zenTimer = document.getElementById('zen-timer');
-    const themes = ['theme-blue', 'theme-green', 'theme-yellow', 'theme-dark-blue', 'theme-dark-green', 'theme-dark-red'];
-    let currentThemeIndex = 0;
+    const themeOptions = document.getElementById('theme-options');
+    const themeOptionButtons = document.querySelectorAll('.theme-option');
+    const themes = ['default', 'dark-mode', 'theme-blue', 'theme-green', 'theme-yellow', 'theme-dark-blue', 'theme-dark-green', 'theme-dark-red'];
+    let currentTheme = 'default';
     let timerInterval;
     let zenModeActive = false;
+    let isTextChanged = false;
 
     // Load cached settings
     const cachedText = localStorage.getItem('markdownText') || '';
-    const cachedTheme = localStorage.getItem('theme') || '';
+    const cachedTheme = localStorage.getItem('theme') || 'default';
     const cachedFont = localStorage.getItem('font') || 'sans-serif';
 
     markdownInput.value = cachedText;
-    if (cachedTheme) {
-        document.body.classList.add(cachedTheme);
-        currentThemeIndex = themes.indexOf(cachedTheme);
-    }
+    document.body.classList.add(cachedTheme);
+    currentTheme = cachedTheme;
     if (cachedFont === 'serif') {
         markdownInput.classList.add('serif');
     } else {
@@ -53,13 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.remove(themes[currentThemeIndex]);
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        document.body.classList.add(themes[currentThemeIndex]);
-        localStorage.setItem('theme', themes[currentThemeIndex]);
+        themeOptions.classList.toggle('hidden');
+    });
+
+    themeOptionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            document.body.classList.remove(currentTheme);
+            currentTheme = button.getAttribute('data-theme');
+            document.body.classList.add(currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeOptions.classList.add('hidden');
+        });
     });
 
     zenModeBtn.addEventListener('click', () => {
+        if (!zenModeActive) {
+            openFullscreen();
+        } else {
+            closeFullscreen();
+        }
         markdownInput.classList.toggle('zen-mode');
         zenTimer.classList.toggle('hidden');
         zenModeActive = !zenModeActive;
@@ -74,10 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
     markdownInput.addEventListener('input', () => {
         localStorage.setItem('markdownText', markdownInput.value);
         ensureCurrentLineInView();
+        isTextChanged = true;
     });
 
     markdownInput.addEventListener('keyup', () => {
         ensureCurrentLineInView();
+    });
+
+    window.addEventListener('beforeunload', (event) => {
+        if (isTextChanged) {
+            event.preventDefault();
+            event.returnValue = '';
+        }
     });
 
     function ensureCurrentLineInView() {
@@ -101,5 +122,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const displaySeconds = seconds % 60;
             zenTimer.textContent = `${String(minutes).padStart(2, '0')}:${String(displaySeconds).padStart(2, '0')}`;
         }, 1000);
+    }
+
+    function openFullscreen() {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+            document.documentElement.msRequestFullscreen();
+        }
+    }
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
     }
 });

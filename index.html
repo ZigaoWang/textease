@@ -9,9 +9,19 @@
 <body>
 <div id="toolbar" class="hidden">
     <button id="download-btn">Download</button>
-    <button id="font-toggle-btn">Toggle Font</button>
-    <button id="theme-toggle-btn">Toggle Theme</button>
     <button id="zen-mode-btn">Zen Mode</button>
+    <button id="font-toggle-btn">Toggle Font</button>
+    <button id="theme-toggle-btn">Choose Theme</button>
+    <div id="theme-options" class="hidden">
+        <button class="theme-option" data-theme="default" style="background-color: #f5f5f5; color: black;">Default</button>
+        <button class="theme-option" data-theme="dark-mode" style="background-color: #1e1e1e; color: #f5f5f5;">Dark</button>
+        <button class="theme-option" data-theme="theme-blue" style="background-color: #d0e7ff; color: #003366;">Blue</button>
+        <button class="theme-option" data-theme="theme-green" style="background-color: #d0ffd8; color: #003300;">Green</button>
+        <button class="theme-option" data-theme="theme-yellow" style="background-color: #fffac8; color: #666600;">Yellow</button>
+        <button class="theme-option" data-theme="theme-dark-blue" style="background-color: #001f3f; color: #7FDBFF;">Dark Blue</button>
+        <button class="theme-option" data-theme="theme-dark-green" style="background-color: #0b3d0b; color: #2ecc40;">Dark Green</button>
+        <button class="theme-option" data-theme="theme-dark-red" style="background-color: #3f0000; color: #ff4136;">Dark Red</button>
+    </div>
 </div>
 <div id="zen-timer" class="zen-timer hidden">00:00</div>
 <div id="editor-container">
