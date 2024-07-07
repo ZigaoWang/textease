@@ -40,6 +40,12 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 4. Push to the branch: `git push origin my-feature-branch`
 5. Open a pull request.
 
+## Preview
+
+![54831720342627_ pic](https://github.com/ZigaoWang/textease/assets/102006756/26c94ff0-4483-4215-8532-373d36b1afd2)
+![54851720342678_ pic_hd](https://github.com/ZigaoWang/textease/assets/102006756/bc380828-d6b9-4328-9cea-43e2d132f773)
+https://github.com/ZigaoWang/textease/assets/102006756/6c86cd54-21f9-45cf-a568-13e6cf1080fc
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/ZigaoWang/textease/blob/master/LICENSE) file for details.
